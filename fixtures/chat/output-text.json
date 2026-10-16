@@ -1,0 +1,261 @@
+[
+  {
+    "name": "plain",
+    "input": "Hello 🦀.",
+    "thinking": false,
+    "tools": false,
+    "stop": null,
+    "reasoning": "",
+    "visible": "Hello 🦀.",
+    "raw_answer": "Hello 🦀.",
+    "stopped": false
+  },
+  {
+    "name": "thinking-first-close",
+    "input": "why</think>\n\nanswer</think>tail",
+    "thinking": true,
+    "tools": false,
+    "stop": null,
+    "reasoning": "why",
+    "visible": "answer</think>tail",
+    "raw_answer": "answer</think>tail",
+    "stopped": false
+  },
+  {
+    "name": "lf-only",
+    "input": "why</think>\n\r\nanswer",
+    "thinking": true,
+    "tools": false,
+    "stop": null,
+    "reasoning": "why",
+    "visible": "\r\nanswer",
+    "raw_answer": "\r\nanswer",
+    "stopped": false
+  },
+  {
+    "name": "partial-think-finish",
+    "input": "why</thi",
+    "thinking": true,
+    "tools": false,
+    "stop": null,
+    "reasoning": "why</thi",
+    "visible": "",
+    "raw_answer": "",
+    "stopped": false
+  },
+  {
+    "name": "initial-think-preserved",
+    "input": "<think>why</think>x",
+    "thinking": true,
+    "tools": false,
+    "stop": null,
+    "reasoning": "<think>why",
+    "visible": "x",
+    "raw_answer": "x",
+    "stopped": false
+  },
+  {
+    "name": "tools-hidden",
+    "input": "a<tool_call>f</tool_call>b<tool_call>g</tool_call>c",
+    "thinking": false,
+    "tools": true,
+    "stop": null,
+    "reasoning": "",
+    "visible": "abc",
+    "raw_answer": "a<tool_call>f</tool_call>b<tool_call>g</tool_call>c",
+    "stopped": false
+  },
+  {
+    "name": "unfinished-tool",
+    "input": "a<tool_call>f",
+    "thinking": false,
+    "tools": true,
+    "stop": null,
+    "reasoning": "",
+    "visible": "a",
+    "raw_answer": "a<tool_call>f",
+    "stopped": false
+  },
+  {
+    "name": "partial-open-finish",
+    "input": "a<tool_ca",
+    "thinking": false,
+    "tools": true,
+    "stop": null,
+    "reasoning": "",
+    "visible": "a<tool_ca",
+    "raw_answer": "a<tool_ca",
+    "stopped": false
+  },
+  {
+    "name": "tool-disabled",
+    "input": "<tool_call>f</tool_call>",
+    "thinking": false,
+    "tools": false,
+    "stop": null,
+    "reasoning": "",
+    "visible": "<tool_call>f</tool_call>",
+    "raw_answer": "<tool_call>f</tool_call>",
+    "stopped": false
+  },
+  {
+    "name": "case-sensitive-live",
+    "input": "a<TOOL_CALL>f</TOOL_CALL>b",
+    "thinking": false,
+    "tools": true,
+    "stop": null,
+    "reasoning": "",
+    "visible": "a<TOOL_CALL>f</TOOL_CALL>b",
+    "raw_answer": "a<TOOL_CALL>f</TOOL_CALL>b",
+    "stopped": false
+  },
+  {
+    "name": "nested-first-close",
+    "input": "a<tool_call>f<tool_call>g</tool_call>tail</tool_call>",
+    "thinking": false,
+    "tools": true,
+    "stop": null,
+    "reasoning": "",
+    "visible": "atail</tool_call>",
+    "raw_answer": "a<tool_call>f<tool_call>g</tool_call>tail</tool_call>",
+    "stopped": false
+  },
+  {
+    "name": "simple-stop",
+    "input": "helloSTOPunheard",
+    "thinking": false,
+    "tools": false,
+    "stop": "STOP",
+    "reasoning": "",
+    "visible": "hello",
+    "raw_answer": "hello",
+    "stopped": true
+  },
+  {
+    "name": "reasoning-stop-ignored",
+    "input": "STOPwhy</think>okSTOPextra",
+    "thinking": true,
+    "tools": false,
+    "stop": "STOP",
+    "reasoning": "STOPwhy",
+    "visible": "ok",
+    "raw_answer": "ok",
+    "stopped": true
+  },
+  {
+    "name": "tool-stop-ignored",
+    "input": "x<tool_call>STOP</tool_call>y",
+    "thinking": false,
+    "tools": true,
+    "stop": "STOP",
+    "reasoning": "",
+    "visible": "xy",
+    "raw_answer": "x<tool_call>STOP</tool_call>y",
+    "stopped": false
+  },
+  {
+    "name": "stop-bridges-call",
+    "input": "AB<tool_call>f</tool_call>CD",
+    "thinking": false,
+    "tools": true,
+    "stop": "BC",
+    "reasoning": "",
+    "visible": "A",
+    "raw_answer": "A",
+    "stopped": true
+  },
+  {
+    "name": "stop-after-call",
+    "input": "A<tool_call>f</tool_call>BC",
+    "thinking": false,
+    "tools": true,
+    "stop": "B",
+    "reasoning": "",
+    "visible": "A",
+    "raw_answer": "A<tool_call>f</tool_call>",
+    "stopped": true
+  },
+  {
+    "name": "unicode-stop",
+    "input": "α🦀中tail",
+    "thinking": false,
+    "tools": false,
+    "stop": "🦀中",
+    "reasoning": "",
+    "visible": "α",
+    "raw_answer": "α",
+    "stopped": true
+  },
+  {
+    "name": "overlapping-stops",
+    "input": "abaTAIL",
+    "thinking": false,
+    "tools": false,
+    "stop": [
+      "aba",
+      "ba"
+    ],
+    "reasoning": "",
+    "visible": "",
+    "raw_answer": "",
+    "stopped": true
+  },
+  {
+    "name": "stop-prefix-final",
+    "input": "okST",
+    "thinking": false,
+    "tools": false,
+    "stop": "STOP",
+    "reasoning": "",
+    "visible": "okST",
+    "raw_answer": "okST",
+    "stopped": false
+  },
+  {
+    "name": "partial-call-stop-on-finish",
+    "input": "ok<to",
+    "thinking": false,
+    "tools": true,
+    "stop": "<to",
+    "reasoning": "",
+    "visible": "ok",
+    "raw_answer": "ok",
+    "stopped": true
+  },
+  {
+    "name": "empty-stops",
+    "input": "ok",
+    "thinking": false,
+    "tools": false,
+    "stop": [
+      "",
+      ""
+    ],
+    "reasoning": "",
+    "visible": "ok",
+    "raw_answer": "ok",
+    "stopped": false
+  },
+  {
+    "name": "mismatched-tags",
+    "input": "</thin<tool_foo>",
+    "thinking": true,
+    "tools": true,
+    "stop": null,
+    "reasoning": "</thin<tool_foo>",
+    "visible": "",
+    "raw_answer": "",
+    "stopped": false
+  },
+  {
+    "name": "empty-reason",
+    "input": "</think>\n<tool_call>f</tool_call>done",
+    "thinking": true,
+    "tools": true,
+    "stop": null,
+    "reasoning": "",
+    "visible": "done",
+    "raw_answer": "<tool_call>f</tool_call>done",
+    "stopped": false
+  }
+]

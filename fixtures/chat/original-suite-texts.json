@@ -1,0 +1,7 @@
+[
+  "[gMASK]<sop><|user|>What is 2 + 2? Answer with one numeral.<|assistant|><think></think>",
+  "[gMASK]<sop><|user|>What is the capital of France? Answer with the city name only.<|assistant|><think></think>",
+  "[gMASK]<sop><|user|>Reverse the letters of stressed. Output only the reversed word.<|assistant|><think></think>",
+  "[gMASK]<sop><|user|>Write a Rust function square(x: i32) that returns x * x. Output only the function.<|assistant|><think></think>",
+  "[gMASK]<sop><|user|>What is 2 + 2? Answer with one numeral.<|assistant|><think></think>"
+]

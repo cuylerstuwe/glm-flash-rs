@@ -1,0 +1,755 @@
+[
+  {
+    "name": "glm-typed",
+    "input": " before <tool_call>run<arg_key>text</arg_key><arg_value>001</arg_value><arg_key>n</arg_key><arg_value>\"5\"</arg_value><arg_key>yes</arg_key><arg_value>True</arg_value></tool_call> after ",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "before  after",
+    "calls": [
+      {
+        "id": "call_000000000000000000000001",
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "arguments": "{\"text\":\"001\",\"n\":5,\"yes\":true}"
+        }
+      }
+    ]
+  },
+  {
+    "name": "glm-closed-json",
+    "input": "<tool_call>Run<arg_key>obj</arg_key><arg_value>{\"x\":[1</arg_value><arg_key>arr</arg_key><arg_value>[\"中\"</arg_value></tool_call>",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "",
+    "calls": [
+      {
+        "id": "call_000000000000000000000001",
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "arguments": "{\"obj\":{\"x\":[1]},\"arr\":[\"中\"]}"
+        }
+      }
+    ]
+  },
+  {
+    "name": "json-direct",
+    "input": "<tool_call>{\"name\":\"run\",\"arguments\":{\"n\":2}}</tool_call>",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "",
+    "calls": [
+      {
+        "id": "call_000000000000000000000001",
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "arguments": "{\"n\":2}"
+        }
+      }
+    ]
+  },
+  {
+    "name": "json-nested-string",
+    "input": "<tool_call>{\"function\":{\"name\":\"Run\",\"arguments\":\"{\\\"n\\\":2}\"}}</tool_call>",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "",
+    "calls": [
+      {
+        "id": "call_000000000000000000000001",
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "arguments": "{\"n\":2}"
+        }
+      }
+    ]
+  },
+  {
+    "name": "json-parameters",
+    "input": "<tool_call>{\"name\":\"Run\",\"parameters\":[1,2]}</tool_call>",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "",
+    "calls": [
+      {
+        "id": "call_000000000000000000000001",
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "arguments": "[1,2]"
+        }
+      }
+    ]
+  },
+  {
+    "name": "json-scalar-arguments-preserved",
+    "input": "<tool_call>{\"name\":\"Run\",\"arguments\":false}</tool_call>",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "",
+    "calls": [
+      {
+        "id": "call_000000000000000000000001",
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "arguments": "false"
+        }
+      }
+    ]
+  },
+  {
+    "name": "json-empty-arguments",
+    "input": "<tool_call>{\"name\":\"Run\",\"arguments\":\"  \"}</tool_call>",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "",
+    "calls": [
+      {
+        "id": "call_000000000000000000000001",
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "arguments": "{}"
+        }
+      }
+    ]
+  },
+  {
+    "name": "qwen-strings",
+    "input": "<tool_call><function=Run><parameter=n>\n5\n</parameter><parameter=text>\n\nhello\n\n</parameter></function></tool_call>",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "",
+    "calls": [
+      {
+        "id": "call_000000000000000000000001",
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "arguments": "{\"n\":\"5\",\"text\":\"\\nhello\\n\"}"
+        }
+      }
+    ]
+  },
+  {
+    "name": "case-insensitive-final",
+    "input": "<TOOL_CALL>rUn</TOOL_CALL>",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "",
+    "calls": [
+      {
+        "id": "call_000000000000000000000001",
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "arguments": "{}"
+        }
+      }
+    ]
+  },
+  {
+    "name": "unknown-retained",
+    "input": "a<tool_call>other</tool_call>b",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "a<tool_call>other</tool_call>b",
+    "calls": []
+  },
+  {
+    "name": "incomplete-retained-by-parser",
+    "input": " a<tool_call>Run",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "a<tool_call>Run",
+    "calls": []
+  },
+  {
+    "name": "two-calls",
+    "input": "<tool_call>Run</tool_call>\n<tool_call>run</tool_call>",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "",
+    "calls": [
+      {
+        "id": "call_000000000000000000000001",
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "arguments": "{}"
+        }
+      },
+      {
+        "id": "call_000000000000000000000002",
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "arguments": "{}"
+        }
+      }
+    ]
+  },
+  {
+    "name": "duplicate-key-last",
+    "input": "<tool_call>Run<arg_key>n</arg_key><arg_value>1</arg_value><arg_key>n</arg_key><arg_value>2</arg_value></tool_call>",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "",
+    "calls": [
+      {
+        "id": "call_000000000000000000000001",
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "arguments": "{\"n\":2}"
+        }
+      }
+    ]
+  },
+  {
+    "name": "json-nonobject-retained",
+    "input": "<tool_call>[1]</tool_call>",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "<tool_call>[1]</tool_call>",
+    "calls": []
+  },
+  {
+    "name": "bad-args-retained",
+    "input": "<tool_call>{\"name\":\"Run\",\"arguments\":\"oops\"}</tool_call>",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "<tool_call>{\"name\":\"Run\",\"arguments\":\"oops\"}</tool_call>",
+    "calls": []
+  },
+  {
+    "name": "no-tools-no-strip",
+    "input": " <tool_call>Run</tool_call> ",
+    "tools": [],
+    "content": " <tool_call>Run</tool_call> ",
+    "calls": []
+  },
+  {
+    "name": "unicode-arg",
+    "input": "<tool_call>Run<arg_key>text</arg_key><arg_value>\n🦀 & <tag>\n</arg_value></tool_call>",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "",
+    "calls": [
+      {
+        "id": "call_000000000000000000000001",
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "arguments": "{\"text\":\"\\n🦀 & <tag>\\n\"}"
+        }
+      }
+    ]
+  },
+  {
+    "name": "python-strip-controls",
+    "input": "\u001c <tool_call>\u001fRun\u001c</tool_call> \u001e",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "",
+    "calls": [
+      {
+        "id": "call_000000000000000000000001",
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "arguments": "{}"
+        }
+      }
+    ]
+  },
+  {
+    "name": "python-casefold-i",
+    "input": "<tool_call><functıon=Run><parameter=n>\n5\n</parameter><parameter=text>\n\nhello\n\n</parameter></functıon></tool_call>",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "n": {
+                "type": "integer"
+              },
+              "yes": {
+                "type": "boolean"
+              },
+              "obj": {
+                "type": "object"
+              },
+              "arr": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "content": "",
+    "calls": [
+      {
+        "id": "call_000000000000000000000001",
+        "type": "function",
+        "function": {
+          "name": "Run",
+          "arguments": "{\"n\":\"5\",\"text\":\"\\nhello\\n\"}"
+        }
+      }
+    ]
+  }
+]

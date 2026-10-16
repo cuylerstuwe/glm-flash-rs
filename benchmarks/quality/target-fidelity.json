@@ -1,0 +1,153 @@
+{
+  "schema": "glm-flash-rs-target-fidelity-summary-v1",
+  "record_type": "Sanitized extraction of completed reference-harness measurements; not a new evaluation or a full Rust serving receipt.",
+  "selected_target": {
+    "checkpoint": "EXL3 TR3 4bpw routed experts",
+    "prepared_checkpoint_revision": "25a44fdbf16862a46b7cc9921142c6c81350af2f",
+    "non_expert_policy": "Selective FP8/BF16, with BF16 output head",
+    "latent_kv": "FP8"
+  },
+  "teacher": {
+    "model": "zai-org/GLM-5.3-Flash-BF16",
+    "model_revision": "a6c167b62691b2bac901344b65cb651a70f53e43",
+    "dataset": "brandonmusic/GLM-5.3-Flash-BF16-Teacher-Logits",
+    "dataset_revision": "95f4fdd94bf29989db2e0d1054e4931f55edb6aa"
+  },
+  "method": {
+    "capture": "Separate serial TP4 reference runtime; one target-forward/commit position at a time on supplied fixed token IDs. This is not a capture of the Rust HTTP serving path.",
+    "direction": "KL(teacher || target)",
+    "units": "nats per prediction position",
+    "scoring": "Full-distribution FP64 log-softmax and reduction; no sampling, draft proposals, top-k approximation or retokenization.",
+    "primary_vocabulary_size": 154880,
+    "secondary_vocabulary_size": 154856,
+    "secondary_vocabulary_policy": "Restrict both distributions to tokenizer vocabulary and renormalize before scoring.",
+    "independent_histories": 3,
+    "scored_positions": 6141,
+    "repeatability": "A repeated first-window capture produced identical logits and scores; it is excluded from the aggregate to avoid double-counting."
+  },
+  "aggregate_by_vocabulary_size": {
+    "154880": {
+      "positions": 6141,
+      "mean_kl": 0.02836221127890758,
+      "p95_kl": 0.12053837603840609,
+      "max_kl": 1.949264090448041,
+      "top1_agreement": 0.951310861423221
+    },
+    "154856": {
+      "positions": 6141,
+      "mean_kl": 0.02836221454877322,
+      "p95_kl": 0.12053837635722402,
+      "max_kl": 1.94926409243005,
+      "top1_agreement": 0.951310861423221
+    }
+  },
+  "windows": [
+    {
+      "id": "final-0000",
+      "domain": "axis1_general",
+      "input_tokens": 2048,
+      "scored_positions": 2047,
+      "teacher_logits_sha256": "9f49af1b1b1a6ac88a00f5feaa89c25232597306d73d7c0cd30bb7e9c775cfb6",
+      "input_token_ids_sha256": "338027e62f41540f73e38c6f9b4b9a06a50196cbd38cd9c69f11886af9d3cf9f",
+      "source_score_summary_sha256": "8688f0e93b5ed314b5776b2bd54eba2e661fdc5c45b0d334963524a5490f610d",
+      "metrics_by_vocabulary_size": {
+        "154856": {
+          "max_kl": 1.0510167117832583,
+          "mean_kl": 0.02779627721657954,
+          "mean_realized_logp_delta_candidate_minus_teacher": 0.0003005847583550581,
+          "mean_teacher_entropy": 1.4923418172971632,
+          "median_kl": 0.01170250060797751,
+          "min_kl": 8.287791285077245e-07,
+          "p95_kl": 0.08511399043742868,
+          "rows": 2047,
+          "top1_agreement": 0.9384465070835368
+        },
+        "154880": {
+          "max_kl": 1.0510167109110713,
+          "mean_kl": 0.02779627539030679,
+          "mean_realized_logp_delta_candidate_minus_teacher": 0.00030058503671894816,
+          "mean_teacher_entropy": 1.4923421035260798,
+          "median_kl": 0.011702500618121133,
+          "min_kl": 8.287791292563778e-07,
+          "p95_kl": 0.08511398933911259,
+          "rows": 2047,
+          "top1_agreement": 0.9384465070835368
+        }
+      }
+    },
+    {
+      "id": "final-0002",
+      "domain": "axis3_code_agentic",
+      "input_tokens": 2048,
+      "scored_positions": 2047,
+      "teacher_logits_sha256": "ad53500646cb9f88f388a0878880b7d36e7465b1d68d9aef8ed6ec256bd6072a",
+      "input_token_ids_sha256": "68cc93c3e99875430ebfec1f60ed399ca0e7484a54bc522eaa4884b022f65b4e",
+      "source_score_summary_sha256": "db5b153e1c8178b03d50499052cc60054e37d8a89c048f8890fce38cc41ce8b5",
+      "metrics_by_vocabulary_size": {
+        "154856": {
+          "max_kl": 1.94926409243005,
+          "mean_kl": 0.034565212445042966,
+          "mean_realized_logp_delta_candidate_minus_teacher": -0.004487261093129823,
+          "mean_teacher_entropy": 0.6570916925900457,
+          "median_kl": 0.001642183629499748,
+          "min_kl": 1.1131022847423068e-08,
+          "p95_kl": 0.15279751344850637,
+          "rows": 2047,
+          "top1_agreement": 0.9423546653639472
+        },
+        "154880": {
+          "max_kl": 1.949264090448041,
+          "mean_kl": 0.03456520892807164,
+          "mean_realized_logp_delta_candidate_minus_teacher": -0.00448726307453968,
+          "mean_teacher_entropy": 0.6570919763529014,
+          "median_kl": 0.0016421836342189276,
+          "min_kl": 1.1131022950991677e-08,
+          "p95_kl": 0.1527975088704615,
+          "rows": 2047,
+          "top1_agreement": 0.9423546653639472
+        }
+      }
+    },
+    {
+      "id": "final-0003",
+      "domain": "axis4_reasoning_termination",
+      "input_tokens": 2048,
+      "scored_positions": 2047,
+      "teacher_logits_sha256": "1dff475ac4e993c7630eedceb664f99341cedf89572db87f9e114f8b337737a5",
+      "input_token_ids_sha256": "74cb2d3954d7b0a7a51bcbde27eabeef88381057f7823373673698f2e661bb52",
+      "source_score_summary_sha256": "2b1bac3b296ff41fa4e09bf42c94f4fe815cd83f8d3ce3f93d738dd318121dd0",
+      "metrics_by_vocabulary_size": {
+        "154856": {
+          "max_kl": 1.3864454442346485,
+          "mean_kl": 0.022725153984697155,
+          "mean_realized_logp_delta_candidate_minus_teacher": 0.015882518483907725,
+          "mean_teacher_entropy": 0.37511008678709634,
+          "median_kl": 3.0998740585009364e-05,
+          "min_kl": 3.0325742571187146e-08,
+          "p95_kl": 0.11725310541573496,
+          "rows": 2047,
+          "top1_agreement": 0.9731314118221788
+        },
+        "154880": {
+          "max_kl": 1.3864449344933403,
+          "mean_kl": 0.022725149518344322,
+          "mean_realized_logp_delta_candidate_minus_teacher": 0.015882537563631772,
+          "mean_teacher_entropy": 0.3751123509595822,
+          "median_kl": 3.0998744372261885e-05,
+          "min_kl": 3.03257478430833e-08,
+          "p95_kl": 0.11725306374195618,
+          "rows": 2047,
+          "top1_agreement": 0.9731314118221788
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "No BF16-reference KLD result for the exact deployed Rust binary is claimed here.",
+    "This diagnostic excludes fast prefill, speculative serving, HTTP, vision and long-context sparse attention.",
+    "The 6141 positions come from three correlated histories, not 6141 independent tasks.",
+    "Divergence includes execution arithmetic as well as quantization.",
+    "KLD and top-token agreement measure distribution fidelity, not answer accuracy or complete-response identity.",
+    "This summary omits private paths, host identifiers, timestamps, prompts and operational history; raw logits are not distributed with the repository."
+  ]
+}

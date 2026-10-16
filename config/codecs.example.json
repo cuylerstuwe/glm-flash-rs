@@ -1,0 +1,27 @@
+{
+  "abi": 1,
+  "jpeg_abi": "REPLACE_WITH_INTEGER_ABI",
+  "webp_version": "REPLACE_WITH_INTEGER_VERSION",
+  "module": {
+    "path": "/opt/glm-flash-rs/artifacts/native/libalaska_image_codecs.so",
+    "sha256": "REPLACE_WITH_CODEC_SHA256"
+  },
+  "dependencies": {
+    "jpeg": {
+      "path": "/opt/glm-flash-rs/artifacts/native/libjpeg.so",
+      "sha256": "REPLACE_WITH_JPEG_SHA256"
+    },
+    "webp": {
+      "path": "/opt/glm-flash-rs/artifacts/native/libwebp.so",
+      "sha256": "REPLACE_WITH_WEBP_SHA256"
+    },
+    "demux": {
+      "path": "/opt/glm-flash-rs/artifacts/native/libdemux.so",
+      "sha256": "REPLACE_WITH_DEMUX_SHA256"
+    },
+    "sharpyuv": {
+      "path": "/opt/glm-flash-rs/artifacts/native/libsharpyuv.so",
+      "sha256": "REPLACE_WITH_SHARPYUV_SHA256"
+    }
+  }
+}

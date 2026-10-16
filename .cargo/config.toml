@@ -1,0 +1,3 @@
+# Qualified CPU target for Linux GB10. Do not apply to the development Mac.
+[target.aarch64-unknown-linux-gnu]
+rustflags = ["-C", "target-cpu=gb10"]

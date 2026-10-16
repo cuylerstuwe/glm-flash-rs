@@ -1,0 +1,35 @@
+[package]
+name = "glm-flash-rs"
+version = "0.1.0"
+edition = "2024"
+publish = false
+description = "Quality-oriented GLM 5.3 Flash inference for four-node NVIDIA GB10 clusters"
+
+[dependencies]
+anyhow = "1"
+blake2 = "=0.10.6"
+httparse = "=1.10.1"
+libc = "=0.2.190"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order", "float_roundtrip", "arbitrary_precision"] }
+minijinja = { version = "=2.12.0", features = ["preserve_order", "loop_controls", "fuel"] }
+ryu = "=1.0.23"
+sha2 = { version = "0.10", features = ["asm"] }
+libloading = "0.8"
+half = "2"
+tokenizers = { version = "0.22", default-features = false, features = ["fancy-regex"] }
+regex-syntax = "=0.8.11"
+fancy-regex = "=0.14.0"
+aho-corasick = "=1.1.5"
+png = "=0.18.1"
+gif = { version = "=0.14.2", default-features = false, features = ["std"] }
+base64 = "=0.22.1"
+ureq = { version = "=3.4.2", default-features = false, features = ["rustls", "platform-verifier"] }
+idna = "=1.1.0"
+
+[dev-dependencies]
+rustls = { version = "=0.23.45", default-features = false, features = ["std", "ring", "tls12"] }
+
+[profile.release]
+lto = "thin"
+codegen-units = 1

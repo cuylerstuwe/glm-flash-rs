@@ -1,0 +1,4 @@
+# This fixture preserves the byte-padded JSON header of a safetensors file.
+fixtures/vision/standalone-header.json whitespace=-blank-at-eol
+# Preserve the upstream license text verbatim, including its terminal blank line.
+native/image-codec-headers/WEBP-COPYING whitespace=-blank-at-eof

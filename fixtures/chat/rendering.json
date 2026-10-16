@@ -1,0 +1,926 @@
+[
+  {
+    "name": "default-high",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello 🦀"
+        }
+      ]
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|user|>Hello 🦀<|assistant|><think>"
+  },
+  {
+    "name": "effort-none",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "x"
+        }
+      ],
+      "reasoning_effort": "none"
+    },
+    "expected": "[gMASK]<sop><|user|>x<|assistant|><think></think>"
+  },
+  {
+    "name": "effort-minimal",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "x"
+        }
+      ],
+      "reasoning_effort": "minimal"
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: Low<|user|>x<|assistant|><think>"
+  },
+  {
+    "name": "effort-low",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "x"
+        }
+      ],
+      "reasoning_effort": "low"
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: Low<|user|>x<|assistant|><think>"
+  },
+  {
+    "name": "effort-medium",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "x"
+        }
+      ],
+      "reasoning_effort": "medium"
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|user|>x<|assistant|><think>"
+  },
+  {
+    "name": "effort-high",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "x"
+        }
+      ],
+      "reasoning_effort": "high"
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|user|>x<|assistant|><think>"
+  },
+  {
+    "name": "effort-xhigh",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "x"
+        }
+      ],
+      "reasoning_effort": "xhigh"
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: Max<|user|>x<|assistant|><think>"
+  },
+  {
+    "name": "effort-max",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "x"
+        }
+      ],
+      "reasoning_effort": "max"
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: Max<|user|>x<|assistant|><think>"
+  },
+  {
+    "name": "explicit-low-off",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "x"
+        }
+      ],
+      "reasoning_effort": "high",
+      "chat_template_kwargs": {
+        "enable_thinking": false,
+        "reasoning_effort": "low"
+      }
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: Low<|user|>x<|assistant|><think></think>"
+  },
+  {
+    "name": "system-parts",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "system",
+          "content": "  rules\n"
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "a"
+            },
+            "b",
+            {
+              "type": "text",
+              "text": "中"
+            }
+          ]
+        }
+      ]
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|system|>  rules\n<|user|>ab中<|assistant|><think>"
+  },
+  {
+    "name": "reasoning-alias-keep",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "one"
+        },
+        {
+          "role": "assistant",
+          "content": " answer ",
+          "reasoning": "kept"
+        },
+        {
+          "role": "user",
+          "content": "two"
+        }
+      ]
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|user|>one<|assistant|><think>kept</think>answer<|user|>two<|assistant|><think>"
+  },
+  {
+    "name": "reasoning-clear",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "one"
+        },
+        {
+          "role": "assistant",
+          "content": " answer ",
+          "reasoning": "kept"
+        },
+        {
+          "role": "user",
+          "content": "two"
+        }
+      ],
+      "thinking": {
+        "clear_thinking": true
+      }
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|user|>one<|assistant|><think></think>answer<|user|>two<|assistant|><think>"
+  },
+  {
+    "name": "explicit-clear-null-wins",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "one"
+        },
+        {
+          "role": "assistant",
+          "content": " answer ",
+          "reasoning": "kept"
+        },
+        {
+          "role": "user",
+          "content": "two"
+        }
+      ],
+      "thinking": {
+        "clear_thinking": true
+      },
+      "chat_template_kwargs": {
+        "clear_thinking": null
+      }
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|user|>one<|assistant|><think>kept</think>answer<|user|>two<|assistant|><think>"
+  },
+  {
+    "name": "embedded-think-last-close",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "assistant",
+          "content": "prefix<think>secret</think>discard</think>\u001c answer "
+        }
+      ]
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|assistant|><think>secret</think>answer<|assistant|><think>"
+  },
+  {
+    "name": "no-reasoning-leak-next-message",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "assistant",
+          "content": "a",
+          "reasoning_content": "r"
+        },
+        {
+          "role": "assistant",
+          "content": "b"
+        }
+      ]
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|assistant|><think>r</think>a<|assistant|><think></think>b<|assistant|><think>"
+  },
+  {
+    "name": "null-call-and-result",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "a",
+              "type": "function",
+              "function": {
+                "name": "f",
+                "arguments": null
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "a",
+          "content": null
+        }
+      ]
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|assistant|><think></think><tool_call>f</tool_call><|observation|><tool_response></tool_response><|assistant|><think>"
+  },
+  {
+    "name": "ordered-arguments",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "a",
+              "type": "function",
+              "function": {
+                "name": "f",
+                "arguments": "{\"z\":\"<raw>\",\"a\":{\"β\":true,\"x\":1.0},\"n\":1e-5}"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|assistant|><think></think><tool_call>f<arg_key>z</arg_key><arg_value><raw></arg_value><arg_key>a</arg_key><arg_value>{\"β\": true, \"x\": 1.0}</arg_value><arg_key>n</arg_key><arg_value>1e-05</arg_value></tool_call><|assistant|><think>"
+  },
+  {
+    "name": "sort-and-discard-unmatched-results",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "id": "a",
+              "type": "function",
+              "function": {
+                "name": "a",
+                "arguments": {}
+              }
+            },
+            {
+              "id": "b",
+              "type": "function",
+              "function": {
+                "name": "b",
+                "arguments": {}
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "b",
+          "content": "B"
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "extra",
+          "content": "drop"
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "a",
+          "content": "A"
+        }
+      ]
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|assistant|><think></think><tool_call>a</tool_call><tool_call>b</tool_call><|observation|><tool_response>A</tool_response><tool_response>B</tool_response><|assistant|><think>"
+  },
+  {
+    "name": "missing-id-preserves-results",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "id": "a",
+              "type": "function",
+              "function": {
+                "name": "a",
+                "arguments": {}
+              }
+            },
+            {
+              "id": "b",
+              "type": "function",
+              "function": {
+                "name": "b",
+                "arguments": {}
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "b",
+          "content": "B"
+        },
+        {
+          "role": "tool",
+          "content": "A"
+        }
+      ]
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|assistant|><think></think><tool_call>a</tool_call><tool_call>b</tool_call><|observation|><tool_response>B</tool_response><tool_response>A</tool_response><|assistant|><think>"
+  },
+  {
+    "name": "output-list-sorts-duplicates",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "id": "a",
+              "type": "function",
+              "function": {
+                "name": "a",
+                "arguments": {}
+              }
+            },
+            {
+              "id": "b",
+              "type": "function",
+              "function": {
+                "name": "b",
+                "arguments": {}
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "content": [
+            {
+              "id": "b",
+              "output": "B"
+            },
+            {
+              "id": "a",
+              "output": "A"
+            },
+            {
+              "id": "a",
+              "output": "AA"
+            }
+          ]
+        }
+      ]
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|assistant|><think></think><tool_call>a</tool_call><tool_call>b</tool_call><|observation|><tool_response>A</tool_response><tool_response>AA</tool_response><tool_response>B</tool_response><|assistant|><think>"
+  },
+  {
+    "name": "drop-bad-call-id",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "assistant",
+          "content": "ok",
+          "reasoning_content": "r",
+          "tool_calls": [
+            {
+              "id": "bad",
+              "type": "function",
+              "function": {
+                "name": "broken",
+                "arguments": "[]"
+              }
+            },
+            {
+              "id": "good",
+              "type": "function",
+              "function": {
+                "name": "f",
+                "arguments": "   "
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "bad",
+          "content": "drop"
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "good",
+          "content": "keep"
+        }
+      ]
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|assistant|><think>r</think>ok<tool_call>f</tool_call><|observation|><tool_response>keep</tool_response><|assistant|><think>"
+  },
+  {
+    "name": "drop-bad-call-position",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "name": "bad",
+                "arguments": "{"
+              }
+            },
+            {
+              "function": {
+                "name": "f",
+                "arguments": {}
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "drop"
+        },
+        {
+          "role": "tool",
+          "content": "keep"
+        }
+      ]
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|assistant|><think></think><tool_call>f</tool_call><|observation|><tool_response>keep</tool_response><|assistant|><think>"
+  },
+  {
+    "name": "tools-order-unicode-hidden",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "x"
+        }
+      ],
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "f",
+            "description": "<é>",
+            "strict": true,
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "z": {
+                  "type": "number"
+                },
+                "a": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "hidden",
+            "defer_loading": true,
+            "strict": false,
+            "parameters": {
+              "type": "object"
+            }
+          }
+        }
+      ]
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|system|>\n# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>\n{\"name\": \"f\", \"description\": \"<é>\", \"parameters\": {\"type\": \"object\", \"properties\": {\"z\": {\"type\": \"number\"}, \"a\": {\"type\": \"string\"}}}}\n</tools>\n\nFor each function call, output the function name and arguments within the following XML format:\n<tool_call>{function-name}<arg_key>{arg-key-1}</arg_key><arg_value>{arg-value-1}</arg_value><arg_key>{arg-key-2}</arg_key><arg_value>{arg-value-2}</arg_value>...</tool_call><|user|>x<|assistant|><think>"
+  },
+  {
+    "name": "choice-none",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "x"
+        }
+      ],
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "f",
+            "description": "<é>",
+            "strict": true,
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "z": {
+                  "type": "number"
+                },
+                "a": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "hidden",
+            "defer_loading": true,
+            "strict": false,
+            "parameters": {
+              "type": "object"
+            }
+          }
+        }
+      ],
+      "tool_choice": " NONE "
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|user|>x<|assistant|><think>"
+  },
+  {
+    "name": "choice-function",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "x"
+        }
+      ],
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "f",
+            "description": "<é>",
+            "strict": true,
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "z": {
+                  "type": "number"
+                },
+                "a": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "hidden",
+            "defer_loading": true,
+            "strict": false,
+            "parameters": {
+              "type": "object"
+            }
+          }
+        }
+      ],
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "f"
+        }
+      }
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|system|>\n# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>\n{\"name\": \"f\", \"description\": \"<é>\", \"parameters\": {\"type\": \"object\", \"properties\": {\"z\": {\"type\": \"number\"}, \"a\": {\"type\": \"string\"}}}}\n</tools>\n\nFor each function call, output the function name and arguments within the following XML format:\n<tool_call>{function-name}<arg_key>{arg-key-1}</arg_key><arg_value>{arg-value-1}</arg_value><arg_key>{arg-key-2}</arg_key><arg_value>{arg-value-2}</arg_value>...</tool_call><|user|>x<|assistant|><think>"
+  },
+  {
+    "name": "deferred-tool-reference",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "tool",
+          "content": [
+            {
+              "type": "tool_reference",
+              "name": "hidden"
+            }
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "f",
+            "description": "<é>",
+            "strict": true,
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "z": {
+                  "type": "number"
+                },
+                "a": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "hidden",
+            "defer_loading": true,
+            "strict": false,
+            "parameters": {
+              "type": "object"
+            }
+          }
+        }
+      ]
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|system|>\n# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>\n{\"name\": \"f\", \"description\": \"<é>\", \"parameters\": {\"type\": \"object\", \"properties\": {\"z\": {\"type\": \"number\"}, \"a\": {\"type\": \"string\"}}}}\n</tools>\n\nFor each function call, output the function name and arguments within the following XML format:\n<tool_call>{function-name}<arg_key>{arg-key-1}</arg_key><arg_value>{arg-value-1}</arg_value><arg_key>{arg-key-2}</arg_key><arg_value>{arg-value-2}</arg_value>...</tool_call><|observation|><tool_response><tools>\n{\"name\": \"hidden\", \"parameters\": {\"type\": \"object\"}}\n</tools></tool_response><|assistant|><think>"
+  },
+  {
+    "name": "items-parameter-does-not-shadow-method",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "name": "f",
+                "arguments": {
+                  "items": "kept",
+                  "keys": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|assistant|><think></think><tool_call>f<arg_key>items</arg_key><arg_value>kept</arg_value><arg_key>keys</arg_key><arg_value>1</arg_value></tool_call><|assistant|><think>"
+  },
+  {
+    "name": "nested-null-tool-output-python-display",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "tool",
+          "content": [
+            {
+              "output": null
+            }
+          ]
+        }
+      ]
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|observation|><tool_response>None</tool_response><|assistant|><think>"
+  },
+  {
+    "name": "template-effort-minimal",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "x"
+        }
+      ],
+      "chat_template_kwargs": {
+        "reasoning_effort": "minimal"
+      }
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: Low<|user|>x<|assistant|><think>"
+  },
+  {
+    "name": "template-effort-medium",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "x"
+        }
+      ],
+      "chat_template_kwargs": {
+        "reasoning_effort": "medium"
+      }
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: High<|user|>x<|assistant|><think>"
+  },
+  {
+    "name": "template-effort-max",
+    "policy": {
+      "thinking": true,
+      "effort": "high",
+      "clear": false
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "x"
+        }
+      ],
+      "chat_template_kwargs": {
+        "reasoning_effort": "max"
+      }
+    },
+    "expected": "[gMASK]<sop><|system|>Reasoning Effort: Max<|user|>x<|assistant|><think>"
+  }
+]

@@ -1,0 +1,764 @@
+{
+  "schema_version": 1,
+  "title": "Four-GB10 sampled coding outcome comparison",
+  "hardware": {
+    "nodes": 4,
+    "accelerator": "NVIDIA GB10",
+    "unified_memory_gb_per_node": 128,
+    "fabric": "Dual 100 Gb/s RoCE rails"
+  },
+  "workload": {
+    "task_types": 8,
+    "attempts_per_task_per_recipe": 2,
+    "thinking": true,
+    "reasoning_effort": "high",
+    "temperature": 1,
+    "top_p": 0.95,
+    "effective_top_k": 20,
+    "seeds": "Fresh explicit 31-bit seeds generated before inference; paired per-task/turn lists used by both recipes",
+    "completion_token_cap_per_request": 12288,
+    "request_wall_guard_seconds": 240,
+    "max_tool_agent_turns": 8,
+    "soft_agent_deadline_seconds": 360,
+    "grading": "Frozen hidden executable cases/traces; positive reference and negative controls verified before inference; no model-based judge or hidden-test retries",
+    "timing": "Includes API, thinking, output, tools and final grading; excludes setup, model loading, warmup and restoration",
+    "order": "GLM Flash RS then Mia TP4; ordinary prefix caching enabled",
+    "scope": "One sequential stream; eight synthetic task types, two sampled attempts each; not a general quality ranking or an isolated runtime/precision comparison"
+  },
+  "recipes": {
+    "glm_flash_rs": {
+      "serving_binary_sha256": "9b16693c9f1692e9415e8bc60faac346847837ead80811011f9f28ceb9b007bf",
+      "target": "brandonmusic/GLM-5.3-Flash-tr3-4bpw",
+      "target_revision": "25a44fdbf16862a46b7cc9921142c6c81350af2f",
+      "drafter_revision": "dc77ff1c99eeb2df044ee3d4f0094eb033fee410",
+      "target_precision": "EXL3/TR3 4bpw routed experts, FP8/BF16 non-experts, BF16 output head"
+    },
+    "mia_tp4": {
+      "source": "https://github.com/MiaAI-Lab/GLM-5.3-Flash-EXL3-2x-DGX-Sparks-TensorFold",
+      "source_commit": "d22003070575c2774de0f010062aa57bae06f3c7",
+      "image_digest": "sha256:eb17e092fa56ea23ca385c3aba0a4250d0cb46c705b9455f2e4c29d1ca4847e8",
+      "target": "Mia-AiLab/GLM-5.3-Flash-EXL3-4bpw-TensorFold",
+      "target_revision": "078455ffe6472f9a52fbc1139f58b9db2881b25c",
+      "drafter": "incoai/GLM-5.3-Flash-DFlash2",
+      "drafter_revision": "bf582e4eacc1810f76656d1811693ff6c6737d2a",
+      "target_precision": "Published Q4 non-expert / FP8 KV recipe; FP8 output head and BF16 kv_b",
+      "draft_policy": "DFlash2 fnc7:0.3 and copy drafts"
+    }
+  },
+  "results": {
+    "glm_flash_rs": {
+      "attempts": 16,
+      "fully_correct": 14,
+      "total_task_seconds": 366.3609481310996,
+      "total_api_seconds": 362.7432423889695,
+      "completion_tokens": 32121,
+      "api_calls": 30,
+      "mean_seconds_per_attempt": 22.897559258193724,
+      "total_seconds_per_correct_outcome": 26.1686391522214,
+      "observed_api_completion_tps": 88.55023676928117,
+      "completion_caps_reached": 0,
+      "attempt_results": [
+        {
+          "task": "flow",
+          "repeat": 0,
+          "passed": true,
+          "wall_seconds": 12.993326786992839,
+          "api_seconds": 12.800616299995454,
+          "api_calls": 1,
+          "completion_tokens": 1150,
+          "checks_passed": 41,
+          "checks_total": 41
+        },
+        {
+          "task": "mvcc",
+          "repeat": 0,
+          "passed": true,
+          "wall_seconds": 10.939713592000771,
+          "api_seconds": 10.76197956802207,
+          "api_calls": 1,
+          "completion_tokens": 1049,
+          "checks_passed": 41,
+          "checks_total": 41
+        },
+        {
+          "task": "resolver",
+          "repeat": 0,
+          "passed": true,
+          "wall_seconds": 16.635940494015813,
+          "api_seconds": 16.44073103298433,
+          "api_calls": 1,
+          "completion_tokens": 1552,
+          "checks_passed": 39,
+          "checks_total": 39
+        },
+        {
+          "task": "build",
+          "repeat": 0,
+          "passed": true,
+          "wall_seconds": 30.75693105501705,
+          "api_seconds": 30.444446730951313,
+          "api_calls": 5,
+          "completion_tokens": 2637,
+          "checks_passed": 73,
+          "checks_total": 73
+        },
+        {
+          "task": "windows",
+          "repeat": 0,
+          "passed": true,
+          "wall_seconds": 11.58437635601149,
+          "api_seconds": 11.39961951400619,
+          "api_calls": 1,
+          "completion_tokens": 1038,
+          "checks_passed": 41,
+          "checks_total": 41
+        },
+        {
+          "task": "queue",
+          "repeat": 0,
+          "passed": false,
+          "wall_seconds": 14.712154756998643,
+          "api_seconds": 14.374024449993158,
+          "api_calls": 4,
+          "completion_tokens": 1352,
+          "checks_passed": 15,
+          "checks_total": 25
+        },
+        {
+          "task": "sql",
+          "repeat": 0,
+          "passed": true,
+          "wall_seconds": 23.629347004985902,
+          "api_seconds": 23.442607592995046,
+          "api_calls": 1,
+          "completion_tokens": 2189,
+          "checks_passed": 24,
+          "checks_total": 24
+        },
+        {
+          "task": "rollback",
+          "repeat": 0,
+          "passed": true,
+          "wall_seconds": 22.198599779017968,
+          "api_seconds": 22.01486554800067,
+          "api_calls": 1,
+          "completion_tokens": 2054,
+          "checks_passed": 36,
+          "checks_total": 36
+        },
+        {
+          "task": "build",
+          "repeat": 1,
+          "passed": true,
+          "wall_seconds": 87.86767706600949,
+          "api_seconds": 87.39191820504493,
+          "api_calls": 5,
+          "completion_tokens": 6868,
+          "checks_passed": 73,
+          "checks_total": 73
+        },
+        {
+          "task": "sql",
+          "repeat": 1,
+          "passed": true,
+          "wall_seconds": 24.480608239013236,
+          "api_seconds": 24.30351776300813,
+          "api_calls": 1,
+          "completion_tokens": 2325,
+          "checks_passed": 24,
+          "checks_total": 24
+        },
+        {
+          "task": "queue",
+          "repeat": 1,
+          "passed": false,
+          "wall_seconds": 18.98938938701758,
+          "api_seconds": 18.657732886989834,
+          "api_calls": 4,
+          "completion_tokens": 1675,
+          "checks_passed": 15,
+          "checks_total": 25
+        },
+        {
+          "task": "resolver",
+          "repeat": 1,
+          "passed": true,
+          "wall_seconds": 27.265327072993387,
+          "api_seconds": 27.094873183988966,
+          "api_calls": 1,
+          "completion_tokens": 2419,
+          "checks_passed": 39,
+          "checks_total": 39
+        },
+        {
+          "task": "windows",
+          "repeat": 1,
+          "passed": true,
+          "wall_seconds": 12.28752908599563,
+          "api_seconds": 12.111397935979767,
+          "api_calls": 1,
+          "completion_tokens": 1104,
+          "checks_passed": 41,
+          "checks_total": 41
+        },
+        {
+          "task": "rollback",
+          "repeat": 1,
+          "passed": true,
+          "wall_seconds": 30.995935059007024,
+          "api_seconds": 30.846239214995876,
+          "api_calls": 1,
+          "completion_tokens": 2701,
+          "checks_passed": 36,
+          "checks_total": 36
+        },
+        {
+          "task": "mvcc",
+          "repeat": 1,
+          "passed": true,
+          "wall_seconds": 11.447284487017896,
+          "api_seconds": 11.25216443100362,
+          "api_calls": 1,
+          "completion_tokens": 1059,
+          "checks_passed": 41,
+          "checks_total": 41
+        },
+        {
+          "task": "flow",
+          "repeat": 1,
+          "passed": true,
+          "wall_seconds": 9.576807909004856,
+          "api_seconds": 9.406508031010162,
+          "api_calls": 1,
+          "completion_tokens": 949,
+          "checks_passed": 41,
+          "checks_total": 41
+        }
+      ],
+      "reported_decode": {
+        "tokens_including_warmup": 32124,
+        "seconds_including_warmup": 348.860931279,
+        "timing_scope": "Native active decode phase including sampling and snapshot copies",
+        "approximate_tps": 92.08253811117925,
+        "warmup_completion_tokens": 3
+      },
+      "api_seconds_per_correct_outcome": 25.910231599212107,
+      "non_api_tool_and_grade_seconds": 3.617705742130056,
+      "non_api_tool_and_grade_seconds_per_correct_outcome": 0.2584075530092897,
+      "inference_active_phases": {
+        "measurement": "Native active-phase counter deltas enclosing the panel and its three-token warmup",
+        "recorded_prefill_seconds_including_warmup": 11.289663872,
+        "recorded_generation_seconds_including_warmup": 348.860931279,
+        "warmup_active_phase_upper_bound_seconds": 0.2201274239923805,
+        "warmup_bound_basis": "Warmup phase time is bounded by its measured API wall time; exact component split is not retained",
+        "scope": "Native prefill/decode work including sampling, communication and snapshot copies; excludes external tools/grading and HTTP/client overhead",
+        "timed_phase_seconds_bounds": {
+          "prefill": [
+            11.06953644800762,
+            11.289663872
+          ],
+          "generation": [
+            348.6408038550076,
+            348.860931279
+          ],
+          "combined": [
+            359.9304677270076,
+            360.150595151
+          ]
+        },
+        "timed_phase_seconds_per_correct_bounds": {
+          "prefill": [
+            0.7906811748576871,
+            0.8064045622857143
+          ],
+          "generation": [
+            24.902914561071974,
+            24.9186379485
+          ],
+          "combined": [
+            25.709319123357687,
+            25.725042510785716
+          ]
+        },
+        "timed_phase_seconds_per_correct_rounded": {
+          "prefill": 0.8,
+          "generation": 24.9,
+          "combined": 25.7
+        },
+        "normalization": "All attempts, including failed ones, divided by fully correct task count"
+      }
+    },
+    "mia_tp4": {
+      "attempts": 16,
+      "fully_correct": 13,
+      "total_task_seconds": 381.9415259590314,
+      "total_api_seconds": 378.5090045048564,
+      "completion_tokens": 35312,
+      "api_calls": 28,
+      "mean_seconds_per_attempt": 23.871345372439464,
+      "total_seconds_per_correct_outcome": 29.380117381463954,
+      "observed_api_completion_tps": 93.29236446090131,
+      "completion_caps_reached": 0,
+      "attempt_results": [
+        {
+          "task": "flow",
+          "repeat": 0,
+          "passed": true,
+          "wall_seconds": 15.720119220000925,
+          "api_seconds": 15.549469769001007,
+          "api_calls": 1,
+          "completion_tokens": 1638,
+          "checks_passed": 41,
+          "checks_total": 41
+        },
+        {
+          "task": "mvcc",
+          "repeat": 0,
+          "passed": true,
+          "wall_seconds": 9.871707884012721,
+          "api_seconds": 9.716278677980881,
+          "api_calls": 1,
+          "completion_tokens": 1061,
+          "checks_passed": 41,
+          "checks_total": 41
+        },
+        {
+          "task": "resolver",
+          "repeat": 0,
+          "passed": true,
+          "wall_seconds": 19.83318645801046,
+          "api_seconds": 19.675715089018922,
+          "api_calls": 1,
+          "completion_tokens": 1835,
+          "checks_passed": 39,
+          "checks_total": 39
+        },
+        {
+          "task": "build",
+          "repeat": 0,
+          "passed": true,
+          "wall_seconds": 42.24595868901815,
+          "api_seconds": 41.94711556294351,
+          "api_calls": 4,
+          "completion_tokens": 3250,
+          "checks_passed": 73,
+          "checks_total": 73
+        },
+        {
+          "task": "windows",
+          "repeat": 0,
+          "passed": true,
+          "wall_seconds": 13.2989748629916,
+          "api_seconds": 13.119623462000163,
+          "api_calls": 1,
+          "completion_tokens": 1245,
+          "checks_passed": 41,
+          "checks_total": 41
+        },
+        {
+          "task": "queue",
+          "repeat": 0,
+          "passed": true,
+          "wall_seconds": 18.693987113016192,
+          "api_seconds": 18.32513625800493,
+          "api_calls": 4,
+          "completion_tokens": 1727,
+          "checks_passed": 25,
+          "checks_total": 25
+        },
+        {
+          "task": "sql",
+          "repeat": 0,
+          "passed": false,
+          "wall_seconds": 39.920777517021634,
+          "api_seconds": 39.72710824699607,
+          "api_calls": 1,
+          "completion_tokens": 3464,
+          "checks_passed": 0,
+          "checks_total": 24
+        },
+        {
+          "task": "rollback",
+          "repeat": 0,
+          "passed": true,
+          "wall_seconds": 21.855573004984763,
+          "api_seconds": 21.69614496998838,
+          "api_calls": 1,
+          "completion_tokens": 2174,
+          "checks_passed": 36,
+          "checks_total": 36
+        },
+        {
+          "task": "build",
+          "repeat": 1,
+          "passed": true,
+          "wall_seconds": 24.17775084800087,
+          "api_seconds": 23.811174173955806,
+          "api_calls": 4,
+          "completion_tokens": 2036,
+          "checks_passed": 73,
+          "checks_total": 73
+        },
+        {
+          "task": "sql",
+          "repeat": 1,
+          "passed": false,
+          "wall_seconds": 34.38957626200863,
+          "api_seconds": 34.19798362799338,
+          "api_calls": 1,
+          "completion_tokens": 3446,
+          "checks_passed": 0,
+          "checks_total": 24
+        },
+        {
+          "task": "queue",
+          "repeat": 1,
+          "passed": true,
+          "wall_seconds": 16.044141332997242,
+          "api_seconds": 15.681708693009568,
+          "api_calls": 4,
+          "completion_tokens": 1524,
+          "checks_passed": 25,
+          "checks_total": 25
+        },
+        {
+          "task": "resolver",
+          "repeat": 1,
+          "passed": false,
+          "wall_seconds": 35.7573829460016,
+          "api_seconds": 35.599757945979945,
+          "api_calls": 1,
+          "completion_tokens": 3436,
+          "checks_passed": 38,
+          "checks_total": 39
+        },
+        {
+          "task": "windows",
+          "repeat": 1,
+          "passed": true,
+          "wall_seconds": 14.909375604998786,
+          "api_seconds": 14.762100452993764,
+          "api_calls": 1,
+          "completion_tokens": 1415,
+          "checks_passed": 41,
+          "checks_total": 41
+        },
+        {
+          "task": "rollback",
+          "repeat": 1,
+          "passed": true,
+          "wall_seconds": 41.73052867400111,
+          "api_seconds": 41.560997120977845,
+          "api_calls": 1,
+          "completion_tokens": 3832,
+          "checks_passed": 36,
+          "checks_total": 36
+        },
+        {
+          "task": "mvcc",
+          "repeat": 1,
+          "passed": true,
+          "wall_seconds": 22.241122210980393,
+          "api_seconds": 22.06858356500743,
+          "api_calls": 1,
+          "completion_tokens": 2159,
+          "checks_passed": 41,
+          "checks_total": 41
+        },
+        {
+          "task": "flow",
+          "repeat": 1,
+          "passed": true,
+          "wall_seconds": 11.25136333098635,
+          "api_seconds": 11.070106889004819,
+          "api_calls": 1,
+          "completion_tokens": 1070,
+          "checks_passed": 41,
+          "checks_total": 41
+        }
+      ],
+      "reported_decode": {
+        "tokens_including_warmup": 35315,
+        "seconds_including_warmup": 367.87579999999997,
+        "timing_scope": "Serving engine per-request decode_s",
+        "approximate_tps": 95.99707292515572,
+        "warmup_completion_tokens": 3
+      },
+      "api_seconds_per_correct_outcome": 29.11607726960434,
+      "non_api_tool_and_grade_seconds": 3.432521454175003,
+      "non_api_tool_and_grade_seconds_per_correct_outcome": 0.2640401118596156,
+      "inference_active_phases": {
+        "measurement": "Sum of timed requests reported prefill_s and decode_s; warmup excluded",
+        "recorded_prefill_seconds": 10.077399999999997,
+        "recorded_generation_seconds": 367.8191,
+        "scope": "Engine per-request prefill_s and decode_s; excludes external tools/grading; phase accounting may differ from the native engine",
+        "timed_phase_seconds_bounds": {
+          "prefill": [
+            10.077399999999997,
+            10.077399999999997
+          ],
+          "generation": [
+            367.8191,
+            367.8191
+          ],
+          "combined": [
+            377.8965,
+            377.8965
+          ]
+        },
+        "timed_phase_seconds_per_correct_bounds": {
+          "prefill": [
+            0.7751846153846151,
+            0.7751846153846151
+          ],
+          "generation": [
+            28.293776923076923,
+            28.293776923076923
+          ],
+          "combined": [
+            29.06896153846154,
+            29.06896153846154
+          ]
+        },
+        "timed_phase_seconds_per_correct_rounded": {
+          "prefill": 0.8,
+          "generation": 28.3,
+          "combined": 29.1
+        },
+        "normalization": "All attempts, including failed ones, divided by fully correct task count"
+      }
+    }
+  },
+  "task_results": [
+    {
+      "task": "flow",
+      "glm_flash_rs": {
+        "passed": 2,
+        "attempts": 2,
+        "seconds": 22.570134695997695,
+        "mean_seconds": 11.285067347998847,
+        "range_seconds": [
+          9.576807909004856,
+          12.993326786992839
+        ],
+        "completion_tokens": 2099,
+        "api_calls": 2
+      },
+      "mia_tp4": {
+        "passed": 2,
+        "attempts": 2,
+        "seconds": 26.971482550987275,
+        "mean_seconds": 13.485741275493638,
+        "range_seconds": [
+          11.25136333098635,
+          15.720119220000925
+        ],
+        "completion_tokens": 2708,
+        "api_calls": 2
+      }
+    },
+    {
+      "task": "mvcc",
+      "glm_flash_rs": {
+        "passed": 2,
+        "attempts": 2,
+        "seconds": 22.386998079018667,
+        "mean_seconds": 11.193499039509334,
+        "range_seconds": [
+          10.939713592000771,
+          11.447284487017896
+        ],
+        "completion_tokens": 2108,
+        "api_calls": 2
+      },
+      "mia_tp4": {
+        "passed": 2,
+        "attempts": 2,
+        "seconds": 32.112830094993114,
+        "mean_seconds": 16.056415047496557,
+        "range_seconds": [
+          9.871707884012721,
+          22.241122210980393
+        ],
+        "completion_tokens": 3220,
+        "api_calls": 2
+      }
+    },
+    {
+      "task": "resolver",
+      "glm_flash_rs": {
+        "passed": 2,
+        "attempts": 2,
+        "seconds": 43.9012675670092,
+        "mean_seconds": 21.9506337835046,
+        "range_seconds": [
+          16.635940494015813,
+          27.265327072993387
+        ],
+        "completion_tokens": 3971,
+        "api_calls": 2
+      },
+      "mia_tp4": {
+        "passed": 1,
+        "attempts": 2,
+        "seconds": 55.59056940401206,
+        "mean_seconds": 27.79528470200603,
+        "range_seconds": [
+          19.83318645801046,
+          35.7573829460016
+        ],
+        "completion_tokens": 5271,
+        "api_calls": 2
+      }
+    },
+    {
+      "task": "build",
+      "glm_flash_rs": {
+        "passed": 2,
+        "attempts": 2,
+        "seconds": 118.62460812102654,
+        "mean_seconds": 59.31230406051327,
+        "range_seconds": [
+          30.75693105501705,
+          87.86767706600949
+        ],
+        "completion_tokens": 9505,
+        "api_calls": 10
+      },
+      "mia_tp4": {
+        "passed": 2,
+        "attempts": 2,
+        "seconds": 66.42370953701902,
+        "mean_seconds": 33.21185476850951,
+        "range_seconds": [
+          24.17775084800087,
+          42.24595868901815
+        ],
+        "completion_tokens": 5286,
+        "api_calls": 8
+      }
+    },
+    {
+      "task": "windows",
+      "glm_flash_rs": {
+        "passed": 2,
+        "attempts": 2,
+        "seconds": 23.87190544200712,
+        "mean_seconds": 11.93595272100356,
+        "range_seconds": [
+          11.58437635601149,
+          12.28752908599563
+        ],
+        "completion_tokens": 2142,
+        "api_calls": 2
+      },
+      "mia_tp4": {
+        "passed": 2,
+        "attempts": 2,
+        "seconds": 28.208350467990385,
+        "mean_seconds": 14.104175233995193,
+        "range_seconds": [
+          13.2989748629916,
+          14.909375604998786
+        ],
+        "completion_tokens": 2660,
+        "api_calls": 2
+      }
+    },
+    {
+      "task": "queue",
+      "glm_flash_rs": {
+        "passed": 0,
+        "attempts": 2,
+        "seconds": 33.701544144016225,
+        "mean_seconds": 16.850772072008112,
+        "range_seconds": [
+          14.712154756998643,
+          18.98938938701758
+        ],
+        "completion_tokens": 3027,
+        "api_calls": 8
+      },
+      "mia_tp4": {
+        "passed": 2,
+        "attempts": 2,
+        "seconds": 34.738128446013434,
+        "mean_seconds": 17.369064223006717,
+        "range_seconds": [
+          16.044141332997242,
+          18.693987113016192
+        ],
+        "completion_tokens": 3251,
+        "api_calls": 8
+      }
+    },
+    {
+      "task": "sql",
+      "glm_flash_rs": {
+        "passed": 2,
+        "attempts": 2,
+        "seconds": 48.10995524399914,
+        "mean_seconds": 24.05497762199957,
+        "range_seconds": [
+          23.629347004985902,
+          24.480608239013236
+        ],
+        "completion_tokens": 4514,
+        "api_calls": 2
+      },
+      "mia_tp4": {
+        "passed": 0,
+        "attempts": 2,
+        "seconds": 74.31035377903027,
+        "mean_seconds": 37.15517688951513,
+        "range_seconds": [
+          34.38957626200863,
+          39.920777517021634
+        ],
+        "completion_tokens": 6910,
+        "api_calls": 2
+      }
+    },
+    {
+      "task": "rollback",
+      "glm_flash_rs": {
+        "passed": 2,
+        "attempts": 2,
+        "seconds": 53.19453483802499,
+        "mean_seconds": 26.597267419012496,
+        "range_seconds": [
+          22.198599779017968,
+          30.995935059007024
+        ],
+        "completion_tokens": 4755,
+        "api_calls": 2
+      },
+      "mia_tp4": {
+        "passed": 2,
+        "attempts": 2,
+        "seconds": 63.58610167898587,
+        "mean_seconds": 31.793050839492935,
+        "range_seconds": [
+          21.855573004984763,
+          41.73052867400111
+        ],
+        "completion_tokens": 6006,
+        "api_calls": 2
+      }
+    }
+  ],
+  "interpretation": {
+    "comparison_unit": "Complete recipes; target checkpoint, precision, drafter, kernels and scheduling differ",
+    "extra_tokens": "Observed additional completion tokens; no established pathological reasoning-loop diagnosis or isolated quantization causation",
+    "limitations": [
+      "Two samples per task and one run per recipe",
+      "No alternating thermal/order-controlled campaign",
+      "Task checks are correlated; case/trace counts are not independent quality observations",
+      "Different generated answers and reasoning lengths prevent isolating engine-speed effects",
+      "Does not measure long-context quality, vision, concurrency, or broad prose quality",
+      "Approximate engine decode rates use different timing scopes and include a three-token warmup; API completion rate uses the same client method and excludes warmup",
+      "Native warmup phase split is not retained: <=0.2202 seconds total, <=0.0158 seconds per correct outcome; all shown phase-cost rounding is unchanged across that bound"
+    ],
+    "inference_cost": "API request time removes external tool/grading execution. Active engine phase time further removes HTTP/client overhead, but includes host/GPU orchestration inside each phase. Neither isolates model weights or pure GPU kernels."
+  }
+}

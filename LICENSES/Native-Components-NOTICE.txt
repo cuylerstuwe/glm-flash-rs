@@ -1,0 +1,15 @@
+Native sampling and RoCE implementation portions
+Copyright 2026 Jay Leaton (https://x.com/jayleaton)
+
+Licensed under the Apache License, Version 2.0. See Apache-2.0.txt.
+
+Modifications: the keyed sampler is transcribed from Triton into CUDA C++ with
+native pointer-based inputs and outputs. The RoCE integration replaces
+Python/Torch bindings with an exception-safe C ABI, explicit stream ownership,
+and Rust runtime management. The communication protocol is retained.
+
+The RoCE portions additionally retain the attribution to b12x's RoCEnante,
+Copyright 2026 Luke Alonso and the b12x contributors, under Apache-2.0.
+
+The sampler's log/exp routines and tables derive from Arm Optimized Routines,
+Copyright (c) Arm Limited. The MIT option is included in Arm-MIT.txt.

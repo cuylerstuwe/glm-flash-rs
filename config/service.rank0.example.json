@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "experimental": true,
+  "qualification": null,
+  "rank": 0,
+  "manifest": "/srv/models/target/rank-0/manifest.json",
+  "kernels": "/opt/glm-flash-rs/artifacts/kernel-cache",
+  "native": "/opt/glm-flash-rs/artifacts/native",
+  "nccl": "/opt/glm-flash-rs/artifacts/native/libnccl.so.2",
+  "master": "192.0.2.10:29541",
+  "transport": "roce",
+  "binary_sha256": "REPLACE_WITH_BINARY_SHA256",
+  "state": "/var/lib/glm-flash-rs/candidate/rank-0",
+  "tokenizer": "/srv/models/target/tokenizer.json",
+  "listen": "127.0.0.1:8001",
+  "api_key_file": "/etc/glm-flash-rs/api.key",
+  "scheduler_key_file": "/etc/glm-flash-rs/scheduler.key",
+  "public_listener": false,
+  "served_model": "glm-5.3-flash-exl3",
+  "ram_bytes": 17179869184,
+  "ssd_bytes": 68719476736,
+  "thinking": true,
+  "reasoning_effort": "high",
+  "clear_thinking_file": "/etc/glm-flash-rs/history-policy",
+  "clear_thinking_default": false,
+  "request_timeout_ms": 3600000,
+  "prefill_tokens": 8192,
+  "final_prefill_head_only": false,
+  "exact_prompt_batch": true,
+  "speculation": {
+    "manifest": "/srv/models/drafter/rank-0/manifest.json",
+    "costs": {
+      "verify": [
+        20.812102635701496,
+        24.149768829345703,
+        27.108760833740234,
+        30.067752838134766,
+        33.0267448425293,
+        35.98573684692383,
+        38.94472885131836,
+        41.90372085571289,
+        43.97081809573703,
+        46.03791533576118,
+        48.10501257578532,
+        50.17210981580946,
+        52.2392070558336,
+        54.30630429585774,
+        56.37340153588188,
+        58.44049877590603
+      ],
+      "block": 2.1446149349212646,
+      "taps_row": 0.043310124427080154,
+      "round": 0
+    },
+    "lookup": true
+  },
+  "greedy_speculation": true,
+  "grammar": {
+    "library": "/opt/glm-flash-rs/artifacts/native/libalaska_xgrammar.so",
+    "sha256": "REPLACE_WITH_GRAMMAR_SHA256"
+  },
+  "vision": {
+    "socket": "/run/glm-flash-rs/vision.sock",
+    "fetch": true
+  },
+  "audit_logits": false
+}

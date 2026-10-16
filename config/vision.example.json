@@ -1,0 +1,6 @@
+{
+  "model_dir": "/srv/models/target/vision",
+  "library": "/opt/glm-flash-rs/artifacts/native/libalaska_vision.so",
+  "library_sha256": "REPLACE_WITH_VISION_LIBRARY_SHA256",
+  "codecs": "/etc/glm-flash-rs/codecs.json"
+}
